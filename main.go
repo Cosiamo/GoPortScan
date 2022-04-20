@@ -34,7 +34,6 @@ func main() {
 	}
 
 	start := time.Now()
-	hostname := "localhost"
 
 	for results := range port.InitialScan(hostname, tcp, udp) {
 		fmt.Print(results)
