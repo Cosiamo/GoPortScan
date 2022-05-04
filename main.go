@@ -10,6 +10,7 @@ import (
 
 var hostname string
 var tcp, udp, help bool
+// var wg sync.WaitGroup
 
 func main() {
 	flag.StringVar(&hostname, "host", "localhost", "Sets hostname")
@@ -22,7 +23,6 @@ func main() {
 		flag.PrintDefaults()
 		return
 	}
-
 	if !tcp && !udp {
 		fmt.Println("Please use the flag:")
 		fmt.Println("	-tcp")
@@ -33,9 +33,11 @@ func main() {
 		return
 	}
 
+	// ===goroutine execution starts here===
+	// starts timer
 	start := time.Now()
 
-	for results := range port.InitialScan(hostname, tcp, udp) {
+	for results := range port.Scan(hostname, tcp, udp) {
 		fmt.Print(results)
 	}
 
@@ -48,3 +50,15 @@ func TimeMeasurement(start time.Time) string {
 	res := fmt.Sprintf("Execution time: %s", elapsed)
 	return res
 }
+
+// func GenerateNum(chOdd chan int, chEven chan int) {
+// 	for i := 1; i <= 6; i++ {
+// 		if i%2 != 0 {
+// 			chOdd <- i
+// 		} else {
+// 			chEven <- i
+// 		}
+// 	}
+// 	close(chOdd)
+// 	close(chEven)
+// }
