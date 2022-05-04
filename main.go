@@ -50,15 +50,3 @@ func TimeMeasurement(start time.Time) string {
 	res := fmt.Sprintf("Execution time: %s", elapsed)
 	return res
 }
-
-// func GenerateNum(chOdd chan int, chEven chan int) {
-// 	for i := 1; i <= 6; i++ {
-// 		if i%2 != 0 {
-// 			chOdd <- i
-// 		} else {
-// 			chEven <- i
-// 		}
-// 	}
-// 	close(chOdd)
-// 	close(chEven)
-// }
